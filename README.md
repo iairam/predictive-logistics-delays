@@ -1,25 +1,25 @@
 # Predicting Logistics Delays: Operational Thresholds vs. Machine Learning
 
-## 📊 Project Overview
+## Project Overview
 Supply chain managers often rely on informal rules—such as flagging shipments when asset utilization crosses 90%—to predict delivery delays. Using a dataset of 1,000 logistics transactions (where 56.6% of shipments experienced delays), I tested whether standalone operational thresholds actually predict delays, and compared them against multivariate machine learning models.
 
 ---
 
-## 🛠️ The Tech Stack
+## The Tech Stack
 - **Language & Libraries:** Python (Pandas, NumPy, Scikit-Learn, Statsmodels, XGBoost, Imbalanced-Learn)
 - **Statistical & ML Methods:** Logit Regression (Odds Ratios), Logistic Regression, Random Forest, XGBoost, SMOTE
 - **Visuals:** Matplotlib, Seaborn
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 - `/data/` -> Smart Logistics Supply Chain dataset (1,000 transactions, 16 operational attributes)
 - `/scripts/` -> Jupyter Notebook containing feature engineering, SMOTE sampling, statistical tests, and ML models
 - `/visuals/` -> Charts showing delay rate thresholds, ROC curves, confusion matrix, and feature importance
 
 ---
 
-## 🧼 Data Prep & Feature Engineering
+## Data Prep & Feature Engineering
 To test both simple rules and complex interactions, I engineered new features from the raw logistics logs:
 - **Threshold Flags:** Created `High_Utilization` (top 10%, >95.9% capacity) and `Big_Surprise` (top 25% demand forecast error, >201.0 units), plus an interaction term multiplying both together.
 - **Interaction & Traffic Features:** Applied a log transformation to waiting times (`Waiting_Time_Log`), built interaction features (`Utilization_Waiting` and `Surprise_Inventory`), and encoded traffic conditions (`Traffic_Status_Heavy` and `Traffic_Status_Detour`).
@@ -27,7 +27,7 @@ To test both simple rules and complex interactions, I engineered new features fr
 
 ---
 
-## 💡 Key Analytical Findings
+## Key Analytical Findings
 
 ### 1. Standalone Thresholds Are Not Enough
 Testing single rules with a `statsmodels` Logit model proved that simple cutoffs miss the bigger picture:
@@ -56,7 +56,7 @@ Extracting the Odds Ratios (OR) from the Logistic Regression model revealed the 
 
 ---
 
-## 📋 Recommendations for Supply Chain Teams
+## Recommendations for Supply Chain Teams
 1. **Invest in Real-Time Traffic Routing:** Because heavy traffic increases delay odds by nearly 15×, teams should prioritize live GPS routing and dynamic scheduling over static warehouse rules.
 2. **Replace Static Cutoffs with Risk Scoring:** Move away from simple 90% utilization alerts and deploy a multivariate risk-scoring model that flags high-risk combinations (like heavy traffic + staging wait times).
 3. **Audit Contingency Buffers:** Study how teams successfully kept delays at 40.9% during simultaneous high-utilization and demand-surprise events, and apply those buffer strategies across standard operations.
